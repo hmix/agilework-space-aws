@@ -5,7 +5,8 @@ resource "aws_subnet" "public_subnet_eu_central_1a" {
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1a"
   tags = {
-  	Name =  "Subnet AZ 1a (public)"
+  	Name 				= "Subnet AZ 1a (public)"
+		environment = "dev"
   }
 }
 resource "aws_subnet" "public_subnet_eu_central_1b" {
@@ -14,7 +15,8 @@ resource "aws_subnet" "public_subnet_eu_central_1b" {
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1b"
   tags = {
-  	Name =  "Subnet AZ 1b (public)"
+  	Name 				= "Subnet AZ 1b (public)"
+		environment = "dev"
   }
 }
 resource "aws_subnet" "public_subnet_eu_central_1c" {
@@ -23,7 +25,8 @@ resource "aws_subnet" "public_subnet_eu_central_1c" {
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1c"
   tags = {
-  	Name =  "Subnet AZ 1c (public)"
+  	Name 				= "Subnet AZ 1c (public)"
+		environment = "dev"
   }
 }
 
@@ -33,7 +36,8 @@ resource "aws_subnet" "private_subnet_eu_central_1a" {
   cidr_block              = "172.31.11.0/24"
   availability_zone = "eu-central-1a"
   tags = {
-  	Name =  "Subnet AZ 1a (private)"
+  	Name 				= "Subnet AZ 1a (private)"
+		environment = "dev"
   }
 }
 resource "aws_subnet" "private_subnet_eu_central_1b" {
@@ -41,7 +45,8 @@ resource "aws_subnet" "private_subnet_eu_central_1b" {
   cidr_block              = "172.31.12.0/24"
   availability_zone = "eu-central-1b"
   tags = {
-  	Name =  "Subnet AZ 1b (private)"
+  	Name 				= "Subnet AZ 1b (private)"
+		environment = "dev"
   }
 }
 resource "aws_subnet" "private_subnet_eu_central_1c" {
@@ -49,7 +54,8 @@ resource "aws_subnet" "private_subnet_eu_central_1c" {
   cidr_block              = "172.31.13.0/24"
   availability_zone = "eu-central-1c"
   tags = {
-  	Name =  "Subnet AZ 1c (private)"
+  	Name 				= "Subnet AZ 1c (private)"
+		environment = "dev"
   }
 }
 
@@ -57,7 +63,8 @@ resource "aws_subnet" "private_subnet_eu_central_1c" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.dev.id}"
   tags {
-    Name = "Internet gateway"
+    Name 				= "Internet gateway for DevVPC"
+		environment = "dev"
   }
 }
 resource "aws_route" "igw_internet_access" {
