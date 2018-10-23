@@ -1,8 +1,3 @@
-# resource "aws_kms_key" "cmk-std-eu-central-1" {
-# #	key_id 									= "alias/cmk-std-eu-central-1"
-#   description             = "Standard CMK for eu-central-1"
-# }
-
 data "aws_kms_alias" "cmk-std-eu-central-1" {
 	name = "alias/cmk-std-eu-central-1"
 }
