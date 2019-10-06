@@ -118,3 +118,37 @@ resource "aws_organizations_policy" "deny_deactivating_vpc_flowlogs" {
  }
 CONTENT
 }
+
+resource "aws_organizations_policy" "require_encryption_on_s3_buckets" {
+	name = "require_encryption_on_s3_buckets"
+
+	content = <<CONTENT
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyIncorrectEncryptionHeader",
+      "Effect": "Deny",
+      "Action": "s3:PutObject",
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "s3:x-amz-server-side-encryption": "AES256"
+        }
+      }
+    },
+    {
+      "Sid": "DenyUnEncryptedObjectUploads",
+      "Effect": "Deny",
+      "Action": "s3:PutObject",
+      "Resource": "*",
+      "Condition": {
+        "Null": {
+          "s3:x-amz-server-side-encryption": true
+        }
+      }
+    }
+  ]
+}
+CONTENT
+}
