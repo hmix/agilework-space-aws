@@ -11,6 +11,15 @@ provider "aws" {
 	shared_credentials_file = "~/.aws/credentials"
 }
 
+# Organization example
+# resource "aws_organizations_organization" "agileworkspace" {
+#   aws_service_access_principals = [
+#     "cloudtrail.amazonaws.com"
+#   ]
+#
+#   feature_set = "ALL"
+# }
+
 data "aws_organizations_organization" "agileworkspace" {}
 
 output "id" {
@@ -86,5 +95,26 @@ resource "aws_organizations_policy" "deny_deactivating_cloudtrail" {
     }
   ]
 }
+CONTENT
+}
+
+resource "aws_organizations_policy" "deny_deactivating_vpc_flowlogs" {
+	name = "deny_deactivating_vpc_flowlogs"
+
+	content = <<CONTENT
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Action": [
+        "ec2:DeleteFlowLogs",
+        "logs:DeleteLogGroup",
+        "logs:DeleteLogStream"
+      ],
+      "Resource": "*"
+    }
+  ]
+ }
 CONTENT
 }
